@@ -1,0 +1,6 @@
+export PATH=DEVICEWORKDIR:$PATH
+cd /system
+busybox tar xpf DEVICEWORKDIR/optimize.tar
+rm DEVICEWORKDIR/optimize.tar
+rm -r /data/dalvik-cache/*
+reboot

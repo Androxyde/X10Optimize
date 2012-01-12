@@ -1,0 +1,6 @@
+export PATH=DEVICEWORKDIR:$PATH
+busybox cp /system/build.prop /system/build.prop.bak
+busybox cp DEVICEWORKDIR/build.prop /system
+chown root.root /system/build.prop
+chmod 644 /system/build.prop
+rm DEVICEWORKDIR/build.prop
