@@ -35,15 +35,15 @@ public class Optimize extends PluginDefaults implements org.plugins.PluginInterf
 	public void doTask() throws Exception {
 		Devices.getCurrent().doBusyboxHelper();
 		if (AdbUtility.Sysremountrw()) {
-			files.pullWithRename("system/build.prop", "build.prop.orig");
+			files.pullWithRename("system/build.prop", Devices.getCurrent().getId()+fsep+"build.prop.orig");
 			CommentedPropertiesFile build = new CommentedPropertiesFile();
-			build.load(new File(files.getFile("build.prop.orig")));
-			build.updateWith(new File(files.getFile("build.prop.merge")));
-			build.store(new FileOutputStream(new File(files.getFileDir()+fsep+"build.prop")), "");
-			files.push("optimize.tar");
-			files.push("build.prop");
-			files.delete("build.prop");
-			files.delete("build.prop.orig");
+			build.load(new File(files.getFile(Devices.getCurrent().getId(),"build.prop.orig")));
+			build.updateWith(new File(files.getFile(Devices.getCurrent().getId(),"build.prop.merge")));
+			build.store(new FileOutputStream(new File(files.getFileDir()+fsep+Devices.getCurrent().getId()+fsep+"build.prop")), "");
+			files.push(Devices.getCurrent().getId(),"optimize.tar");
+			files.push(Devices.getCurrent().getId(),"build.prop");
+			files.delete(Devices.getCurrent().getId()+fsep+"build.prop");
+			files.delete(Devices.getCurrent().getId()+fsep+"build.prop.orig");
 			Shell pushbuildprop = sfactory.createShell("pushbuildprop");
 			pushbuildprop.runRoot();
 			Shell optimize = sfactory.createShell("optimize");
