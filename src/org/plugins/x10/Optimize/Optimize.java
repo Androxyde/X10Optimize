@@ -48,9 +48,9 @@ public class Optimize extends PluginDefaults implements org.plugins.PluginInterf
 			pushbuildprop.runRoot();
 			Shell optimize = sfactory.createShell("optimize");
 			optimize.runRoot();
-			MyLogger.info("Optimize finished. Rebooting phone ...");
+			MyLogger.getLogger().info("Optimize finished. Rebooting phone ...");
 		}
-		else MyLogger.info("Error mounting /system rw");
+		else MyLogger.getLogger().info("Error mounting /system rw");
 	}
 
 	public void run() {
@@ -58,7 +58,7 @@ public class Optimize extends PluginDefaults implements org.plugins.PluginInterf
 			Worker.post(new RunTask());
 		}
 		catch (Exception e) {
-			MyLogger.error(e.getMessage());
+			MyLogger.getLogger().error(e.getMessage());
 		}
 	}
 
